@@ -87,5 +87,4 @@ describe('First Api Tests', () => {
         expect(response.status).to.equal(StatusCodes.OK);
         expect(response.data.json).to.eql(body);
     });
-
 });
