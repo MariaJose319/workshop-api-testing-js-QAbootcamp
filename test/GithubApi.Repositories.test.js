@@ -1,6 +1,6 @@
 const fs = require('fs');
 const axios = require('axios');
-const { expect, assert } = require('chai');
+const { expect } = require('chai');
 const { StatusCodes } = require('http-status-codes');
 const md5 = require('md5');
 
@@ -15,7 +15,6 @@ describe('Github Api Test', () => {
     let repositoriesResponse;
     let repoInfo;
     let repoListResponse;
-    let downloadZipResponse;
     let readmeInfo;
     let downloadREADMEResponse;
 
@@ -30,7 +29,6 @@ describe('Github Api Test', () => {
     it('should get GitHub user information', async () => {
       expect(userResponse.status).to.equal(StatusCodes.OK);
       expect(userResponse.data.name).to.equal('Alejandro Perdomo');
-      assert.equal(userResponse.data.name, 'Alejandro Perdomo');
       expect(userResponse.data.company).to.equal('Perficient Latam');
       expect(userResponse.data.location).to.equal('Colombia');
     });
@@ -51,18 +49,15 @@ describe('Github Api Test', () => {
       expect(repoInfo.description).to.equal('A Simple Jasmine JSON Report');
     });
 
-    before(async () => {
-      downloadZipResponse = await axios.get(`${repoInfo.url}/zipball/master`, {
+    it('should download zip repository', async () => {
+      const path = 'data.zip';
+      const writer = fs.createWriteStream(path);
+      const downloadZipResponse = await axios.get(`${repoInfo.url}/zipball/master`, {
         headers: {
           Authorization: `token ${process.env.ACCESS_TOKEN}`
         },
         responseType: 'stream'
       });
-    });
-
-    it('should download zip repository', async () => {
-      const path = 'data.zip';
-      const writer = fs.createWriteStream(path);
       expect(downloadZipResponse.status).to.equal(StatusCodes.OK);
       downloadZipResponse.data.pipe(writer);
       expect(fs.existsSync(path)).to.equal(true);
@@ -97,8 +92,6 @@ describe('Github Api Test', () => {
     it('should download README file', async () => {
       expect(downloadREADMEResponse.status).to.equal(StatusCodes.OK);
       const fileContent = downloadREADMEResponse.data;
-      /* 497eb689648cbbda472b16baaee45731
-      (command prompt) certutil -hashfile README.md MD5 */
       expect(md5(fileContent)).to.equal('497eb689648cbbda472b16baaee45731');
     });
   });

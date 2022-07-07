@@ -195,4 +195,7 @@ $RECYCLE.BIN/
 ## Reports ##
 report
 
+# downloaded file
+data.zip
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,node,visualstudiocode
