@@ -20,7 +20,7 @@ describe('Github Api Test - Authentication', () => {
     });
   });
 
-  /* it('Via OAuth2 Tokens by parameter', async () => {
+  it('Via OAuth2 Tokens by parameter', async () => {
     const response = await axios.get(
       `${urlBase}/repos/${githubUserName}/${repository}`,
       { access_token: process.env.ACCESS_TOKEN }
@@ -28,5 +28,5 @@ describe('Github Api Test - Authentication', () => {
 
     expect(response.status).to.equal(StatusCodes.OK);
     expect(response.data.description).equal('This is a Workshop about Api Testing in JavaScript');
-  }); */
+  });
 });
