@@ -6,7 +6,7 @@ const urlBase = 'https://api.github.com';
 const githubUserName = 'MariaJose319';
 const repository = 'workshop-api-testing-js-QAbootcamp';
 
-describe('Github Api Test', () => {
+describe('Github Api Test - Authentication', () => {
   describe('Authentication', () => {
     it('Via OAuth2 Tokens by Header', async () => {
       const response = await axios.get(`${urlBase}/repos/${githubUserName}/${repository}`, {
