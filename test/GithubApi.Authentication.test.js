@@ -6,7 +6,7 @@ const urlBase = 'https://api.github.com';
 const githubUserName = 'MariaJose319';
 const repository = 'workshop-api-testing-js-QAbootcamp';
 
-describe('Github Api Test', () => {
+describe('Github Api Test - Authentication', () => {
   describe('Authentication', () => {
     it('Via OAuth2 Tokens by Header', async () => {
       const response = await axios.get(`${urlBase}/repos/${githubUserName}/${repository}`, {
@@ -20,7 +20,7 @@ describe('Github Api Test', () => {
     });
   });
 
-  it('Via OAuth2 Tokens by parameter', async () => {
+  /* it('Via OAuth2 Tokens by parameter', async () => {
     const response = await axios.get(
       `${urlBase}/repos/${githubUserName}/${repository}`,
       { access_token: process.env.ACCESS_TOKEN }
@@ -28,5 +28,5 @@ describe('Github Api Test', () => {
 
     expect(response.status).to.equal(StatusCodes.OK);
     expect(response.data.description).equal('This is a Workshop about Api Testing in JavaScript');
-  });
+  }); */
 });
