@@ -2,7 +2,7 @@ const axios = require('axios');
 const { expect, assert } = require('chai');
 const { StatusCodes } = require('http-status-codes');
 
-describe.only('Consume PUT Method', () => {
+describe('Consume PUT Method', () => {
   it('should follow aperdomob', async () => {
     const response = await axios.put('https://api.github.com/user/following/aperdomob', {}, {
       headers: {
