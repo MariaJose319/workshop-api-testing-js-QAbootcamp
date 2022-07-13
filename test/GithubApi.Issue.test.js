@@ -21,7 +21,7 @@ describe('Consume POST and PATCH Method', () => {
 
   it('verify that the user has at least a public repository', async () => {
     expect(userResponse.status).to.equal(StatusCodes.OK);
-    expect(userResponse.data.public_repos).to.satisfy((num) => num > 0);
+    expect(userResponse.data.public_repos).to.be.above(0);
   });
 
   before(async () => {
