@@ -56,7 +56,7 @@ describe('Consume POST and PATCH Method', () => {
   });
 
   before(async () => {
-    patchResponse = await axios.patch(`${urlBase}/repos/${user}/${repo}/issues/${createIssueResponse.data.number}`, {
+    patchResponse = await axios.patch(`${urlBase}/repos/${userResponse.data.login}/${repoInfo.name}/issues/${createIssueResponse.data.number}`, {
       body: 'this is a body example for issue'
     }, {
       headers: {
