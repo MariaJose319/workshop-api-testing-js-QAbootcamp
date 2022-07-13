@@ -2,12 +2,13 @@ const axios = require('axios');
 const { expect, assert } = require('chai');
 const { StatusCodes } = require('http-status-codes');
 
-describe('Consume POST and PATCH Method', () => {
-  const user = 'MariaJose319';
+describe.only('Consume POST and PATCH Method', () => {
   const repo = 'BootcampQA_PetStoreChallenge';
   const urlBase = 'https://api.github.com';
   let userResponse;
   let reposResponse;
+  let reposList;
+  let repoInfo;
   let createIssueResponse;
   let patchResponse;
 
@@ -30,12 +31,12 @@ describe('Consume POST and PATCH Method', () => {
         Authorization: `token ${process.env.ACCESS_TOKEN}`
       }
     });
+    reposList = reposResponse.data;
+    repoInfo = reposList.find((element) => element.name === repo);
   });
 
   it('get a list of repositories and verify that one exists', async () => {
     expect(reposResponse.status).to.equal(StatusCodes.OK);
-    const reposList = reposResponse.data;
-    const repoInfo = reposList.find((element) => element.name === repo);
     assert.exists(repoInfo);
   });
 
