@@ -15,20 +15,24 @@ describe('Consume DELETE Method', () => {
   let deletedResponse;
 
   describe('Create a gist', () => {
-    before(async () => {
-      createGistResponse = await axios.post(`${urlBase}/gists`, {
-        description: 'this is a gist example with a promise',
-        public: true,
-        files: {
-          'myPromise.js': {
-            content: `var myPromise = new Promise(function(resolve, reject) {
-                setTimeout(function() {
-                  resolve('Tick, Tick... Boom!');
-                }, 3000);
-              });`
-          }
+    const gistCode = `var myPromise = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        resolve('Tick, Tick... Boom!');
+      }, 3000);
+    });`;
+
+    const myGist = {
+      description: 'this is a gist example with a promise',
+      public: true,
+      files: {
+        'myPromise.js': {
+          content: gistCode
         }
-      }, {
+      }
+    };
+
+    before(async () => {
+      createGistResponse = await axios.post(`${urlBase}/gists`, myGist, {
         headers: {
           Authorization: `token ${process.env.ACCESS_TOKEN}`
         }
@@ -37,19 +41,7 @@ describe('Consume DELETE Method', () => {
 
     it('create a Gist with a promise', async () => {
       expect(createGistResponse.status).to.equal(StatusCodes.CREATED);
-      expect(createGistResponse.data).containSubset({
-        description: 'this is a gist example with a promise',
-        public: true,
-        files: {
-          'myPromise.js': {
-            content: `var myPromise = new Promise(function(resolve, reject) {
-                setTimeout(function() {
-                  resolve('Tick, Tick... Boom!');
-                }, 3000);
-              });`
-          }
-        }
-      });
+      expect(createGistResponse.data).containSubset(myGist);
     });
 
     before(async () => {
@@ -63,6 +55,7 @@ describe('Consume DELETE Method', () => {
     it('verify the created Gist', async () => {
       expect(infoGistResponse.status).to.equal(StatusCodes.OK);
       assert.exists(infoGistResponse.data);
+      expect(infoGistResponse.data).containSubset(myGist);
     });
   });
 
