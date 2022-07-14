@@ -2,7 +2,7 @@ const axios = require('axios');
 const { expect, assert } = require('chai');
 const { StatusCodes } = require('http-status-codes');
 
-describe.only('Consume POST and PATCH Method', () => {
+describe('Consume POST and PATCH Method', () => {
   const repo = 'BootcampQA_PetStoreChallenge';
   const urlBase = 'https://api.github.com';
   let userResponse;
