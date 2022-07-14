@@ -2,7 +2,7 @@ const axios = require('axios');
 const { expect } = require('chai');
 const { StatusCodes } = require('http-status-codes');
 
-describe.only('Consume HEAD Method', () => {
+describe('Consume HEAD Method', () => {
   let response;
 
   before(async () => {
