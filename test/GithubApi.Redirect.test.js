@@ -17,5 +17,6 @@ describe('Consume HEAD Method', () => {
   it('consume get method and redirect the url', async () => {
     const URLresponse = await axios.get('https://github.com/aperdomob/redirect-test');
     expect(URLresponse.status).to.equal(StatusCodes.OK);
+    expect(URLresponse.request.res.responseUrl).to.equal('https://github.com/aperdomob/new-redirect-test');
   });
 });
